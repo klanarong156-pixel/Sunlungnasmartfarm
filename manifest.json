@@ -1,0 +1,44 @@
+{
+  "name": "SmartFarm V14 Premium Enterprise",
+  "short_name": "SmartFarm V14",
+  "description": "Premium Smart Farming Management System",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#ffffff",
+  "theme_color": "#007AFF",
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "/assets/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/icon-maskable-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Dashboard",
+      "url": "/",
+      "icons": [{ "src": "/assets/icons/dashboard.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Pumps Control",
+      "url": "/#pumps",
+      "icons": [{ "src": "/assets/icons/pump.png", "sizes": "96x96" }]
+    }
+  ]
+}

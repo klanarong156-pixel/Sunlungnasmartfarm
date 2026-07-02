@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartFarm V14 - Admin Panel</title>
+  <link rel="stylesheet" href="/src/styles/global.css">
+  <style>
+    .admin-grid {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      height: 100vh;
+    }
+    .sidebar {
+      background: var(--bg-darker);
+      border-right: 1px solid var(--border);
+      padding: 1.5rem;
+    }
+    .content {
+      padding: 2rem;
+      overflow-y: auto;
+    }
+    .nav-item {
+      display: block;
+      padding: 0.75rem 1rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      border-radius: var(--radius-md);
+      margin-bottom: 0.5rem;
+      transition: all 0.2s;
+    }
+    .nav-item:hover, .nav-item.active {
+      background: rgba(6, 182, 212, 0.1);
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <div id="admin-root" class="admin-grid">
+    <aside class="sidebar">
+      <h2>Admin Panel</h2>
+      <nav style="margin-top: 2rem;">
+        <a href="#dashboard" class="nav-item active">Dashboard</a>
+        <a href="#users" class="nav-item">จัดการผู้ใช้</a>
+        <a href="#devices" class="nav-item">จัดการอุปกรณ์</a>
+        <a href="#sensors" class="nav-item">จัดการเซนเซอร์</a>
+        <a href="#logs" class="nav-item">Audit Logs</a>
+        <a href="#system" class="nav-item">System Health</a>
+        <a href="#backup" class="nav-item">Backup & Restore</a>
+        <a href="/" class="nav-item" style="margin-top: 2rem; border-top: 1px solid var(--border); padding-top: 1rem;">Back to Dashboard</a>
+      </nav>
+    </aside>
+    <main class="content">
+      <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+        <h1 id="page-title">Admin Dashboard</h1>
+        <div id="admin-user-info"></div>
+      </header>
+      <div id="admin-content">
+        <!-- Content will be loaded here -->
+        <div class="glass-lg" style="padding: 2rem;">
+          <h3>ยินดีต้อนรับสู่ระบบจัดการหลังบ้าน</h3>
+          <p>กรุณาเลือกเมนูทางด้านซ้ายเพื่อจัดการระบบ</p>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script type="module" src="/src/admin.js"></script>
+</body>
+</html>

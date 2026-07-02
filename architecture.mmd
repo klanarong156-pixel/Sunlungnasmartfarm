@@ -1,0 +1,49 @@
+graph TD
+    %% Styling
+    classDef client fill:#f9f9f9,stroke:#333,stroke-width:2px;
+    classDef server fill:#e1f5fe,stroke:#0288d1,stroke-width:2px;
+    classDef db fill:#e8f5e9,stroke:#009688,stroke-width:2px;
+    classDef hardware fill:#fff3e0,stroke:#ff9800,stroke-width:2px;
+
+    %% Nodes
+    subgraph Frontend ["Premium UI (Browser)"]
+        UI[Glassmorphism Dashboard]
+        WS_Client[WebSocket Client]
+        API_Client[REST API Client]
+    end
+
+    subgraph Backend ["Node.js Server"]
+        API[Express REST API]
+        WS_Server[WebSocket Server]
+        Auth[JWT + Refresh Token]
+        MQTT_Client[MQTT Controller]
+    end
+
+    subgraph Infrastructure ["Infrastructure"]
+        DB[(SQLite / MySQL)]
+        Broker((MQTT Broker))
+    end
+
+    subgraph Edge ["ESP8266 Firmware"]
+        FW[Event-driven Core]
+        Sensors["Sensors (DHT22, Soil)"]
+        Relay[Pump Relay]
+        OTA[OTA Updates]
+    end
+
+    %% Connections
+    UI <-->|WebSocket Real-time| WS_Server
+    UI <-->|HTTPS REST| API
+    API_Client --> Auth
+    Auth --> API
+
+    API <-->|SQL| DB
+    WS_Server <--> MQTT_Client
+    API <--> MQTT_Client
+
+    MQTT_Client <-->|MQTT/TLS| Broker
+    Broker <-->|MQTT| FW
+
+    FW --> Sensors
+    FW --> Relay
+    FW <--> OTA
