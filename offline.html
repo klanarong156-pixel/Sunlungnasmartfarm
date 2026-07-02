@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="SmartFarm V15 Premium - Offline Page">
+  <meta name="theme-color" content="#007AFF">
+  <title>SmartFarm - Offline</title>
+  
+  <link rel="stylesheet" href="/src/styles/global.css">
+  <link rel="stylesheet" href="/src/styles/premium.css">
+  <link rel="stylesheet" href="/src/styles/dark-mode.css">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html, body {
+      height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    
+    body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 1rem;
+    }
+
+    .offline-container {
+      text-align: center;
+      max-width: 500px;
+      animation: slideIn 0.5s ease-out;
+    }
+
+    .offline-icon {
+      font-size: 5rem;
+      margin-bottom: 1rem;
+      animation: bounce 2s infinite;
+    }
+
+    .offline-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #FF3B30, #FF9500);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .offline-message {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .offline-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      text-align: left;
+    }
+
+    .offline-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+      color: var(--text-primary);
+    }
+
+    .offline-card ul {
+      list-style: none;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .offline-card li {
+      padding: 0.5rem 0;
+      padding-left: 1.75rem;
+      position: relative;
+    }
+
+    .offline-card li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--success);
+      font-weight: 700;
+    }
+
+    .offline-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .offline-button {
+      padding: 0.875rem 1.75rem;
+      border-radius: 0.75rem;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 1rem;
+    }
+
+    .offline-button-primary {
+      background: linear-gradient(135deg, #007AFF, #34C759);
+      color: white;
+    }
+
+    .offline-button-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0, 122, 255, 0.3);
+    }
+
+    .offline-button-secondary {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+    }
+
+    .offline-button-secondary:hover {
+      background: var(--bg-tertiary);
+    }
+
+    .connection-status {
+      padding: 1rem;
+      border-radius: 0.75rem;
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.95rem;
+    }
+
+    .connection-status.checking {
+      background: rgba(255, 149, 0, 0.1);
+      color: #FF9500;
+    }
+
+    .connection-status.connected {
+      background: rgba(52, 199, 89, 0.1);
+      color: #34C759;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 149, 0, 0.3);
+      border-top-color: #FF9500;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-right: 0.5rem;
+    }
+
+    @media (max-width: 480px) {
+      .offline-title {
+        font-size: 1.5rem;
+      }
+
+      .offline-icon {
+        font-size: 3rem;
+      }
+
+      .offline-message {
+        font-size: 1rem;
+      }
+
+      .offline-actions {
+        flex-direction: column;
+      }
+
+      .offline-button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="offline-container">
+    <div class="offline-icon">📡</div>
+    
+    <h1 class="offline-title">You're Offline</h1>
+    
+    <p class="offline-message">
+      It seems you've lost your internet connection. Don't worry, you can still view cached data and prepare actions offline.
+    </p>
+
+    <div class="offline-card">
+      <h3>📱 What You Can Do</h3>
+      <ul>
+        <li>View previously loaded farm data</li>
+        <li>Check dashboard history</li>
+        <li>Prepare pump control commands</li>
+        <li>Read sensor readings from cache</li>
+      </ul>
+    </div>
+
+    <div class="offline-card">
+      <h3>🔄 What's Not Available</h3>
+      <ul>
+        <li>Real-time sensor updates</li>
+        <li>MQTT device control</li>
+        <li>New data synchronization</li>
+        <li>Admin panel access</li>
+      </ul>
+    </div>
+
+    <div class="offline-actions">
+      <button class="offline-button offline-button-primary" onclick="window.location.href = '/'">
+        ← Back to Dashboard
+      </button>
+      <button class="offline-button offline-button-secondary" onclick="checkConnection()">
+        🔄 Check Connection
+      </button>
+    </div>
+
+    <div id="connection-status" class="connection-status checking">
+      <span class="spinner"></span>
+      Checking connection...
+    </div>
+  </div>
+
+  <script>
+    // Dark mode initialization
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+      document.documentElement.classList.add('dark');
+    }
+
+    // Connection checking
+    let checkInterval = null;
+
+    function checkConnection() {
+      const statusEl = document.getElementById('connection-status');
+      statusEl.className = 'connection-status checking';
+      statusEl.innerHTML = '<span class="spinner"></span> Checking connection...';
+
+      // Try to fetch a small endpoint
+      fetch('/api/health', { 
+        method: 'HEAD',
+        cache: 'no-store'
+      })
+        .then(response => {
+          if (response.ok) {
+            statusEl.className = 'connection-status connected';
+            statusEl.textContent = '✓ Connection restored! Redirecting...';
+            setTimeout(() => {
+              window.location.href = '/';
+            }, 1500);
+          }
+        })
+        .catch(() => {
+          statusEl.className = 'connection-status checking';
+          statusEl.textContent = '⚠ Still offline. Retrying in 5 seconds...';
+        });
+    }
+
+    // Auto-check connection periodically
+    checkInterval = setInterval(() => {
+      if (navigator.onLine) {
+        checkConnection();
+      }
+    }, 5000);
+
+    // Listen for online event
+    window.addEventListener('online', () => {
+      console.log('Connection restored!');
+      clearInterval(checkInterval);
+      checkConnection();
+    });
+
+    // Cleanup
+    window.addEventListener('beforeunload', () => {
+      if (checkInterval) {
+        clearInterval(checkInterval);
+      }
+    });
+
+    // Initial check
+    if (navigator.onLine) {
+      checkConnection();
+    }
+  </script>
+</body>
+</html>
