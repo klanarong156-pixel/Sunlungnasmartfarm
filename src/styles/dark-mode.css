@@ -1,0 +1,320 @@
+/* SmartFarm V15 - Dark Mode Styles */
+
+/* Dark mode color scheme override */
+html.dark {
+  color-scheme: dark;
+}
+
+html.dark {
+  --bg-primary: #0F172A;
+  --bg-secondary: #1A202C;
+  --bg-tertiary: #2D3748;
+  --bg-darker: #3F4B5D;
+  --bg-accent: #007AFF;
+
+  --text-primary: #FFFFFF;
+  --text-secondary: #CCCCCC;
+  --text-tertiary: #999999;
+  --text-muted: #666666;
+
+  --border: #3F4B5D;
+  --border-light: #2D3748;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.5);
+}
+
+/* Input elements in dark mode */
+html.dark input,
+html.dark textarea,
+html.dark select {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border-color: var(--border);
+}
+
+html.dark input:focus,
+html.dark textarea:focus,
+html.dark select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.2);
+}
+
+html.dark input::placeholder {
+  color: var(--text-tertiary);
+}
+
+/* Buttons in dark mode */
+html.dark .btn-secondary {
+  background-color: var(--bg-secondary);
+  border-color: var(--border);
+}
+
+html.dark .btn-secondary:hover:not(:disabled) {
+  background-color: var(--bg-tertiary);
+}
+
+/* Card styling in dark mode */
+html.dark .card {
+  background-color: var(--bg-secondary);
+  border-color: var(--border);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+html.dark .card:hover {
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Glass effect in dark mode */
+html.dark .glass {
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+html.dark .glass-lg {
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+html.dark .premium-card {
+  background: rgba(15, 23, 42, 0.9);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+html.dark .premium-card:hover {
+  border-color: rgba(0, 122, 255, 0.3);
+}
+
+/* Header in dark mode */
+html.dark .premium-header {
+  box-shadow: 0 10px 30px rgba(0, 122, 255, 0.15);
+}
+
+html.dark .premium-header h1 {
+  background: linear-gradient(135deg, #007AFF 0%, #34C759 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Data items in dark mode */
+html.dark .data-item {
+  background: var(--bg-secondary);
+  border-color: var(--border);
+}
+
+/* Control panel in dark mode */
+html.dark .control-item {
+  background: var(--bg-tertiary);
+  border-color: var(--border);
+}
+
+/* Chart container in dark mode */
+html.dark .chart-container {
+  background: var(--bg-secondary);
+  border-color: var(--border);
+}
+
+/* Lists in dark mode */
+html.dark .animated-list li {
+  border-bottom-color: var(--border);
+}
+
+html.dark .animated-list li:hover {
+  background: var(--bg-tertiary);
+}
+
+/* Badge styling in dark mode */
+html.dark .badge {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+/* Alert messages in dark mode */
+html.dark .alert-info {
+  background: rgba(0, 122, 255, 0.15);
+  border-left-color: #007AFF;
+  color: #7EC4FF;
+}
+
+html.dark .alert-success {
+  background: rgba(52, 199, 89, 0.15);
+  border-left-color: #34C759;
+  color: #68D46F;
+}
+
+html.dark .alert-warning {
+  background: rgba(255, 149, 0, 0.15);
+  border-left-color: #FF9500;
+  color: #FFB84D;
+}
+
+html.dark .alert-error {
+  background: rgba(255, 59, 48, 0.15);
+  border-left-color: #FF3B30;
+  color: #FF7369;
+}
+
+/* Tabs in dark mode */
+html.dark .tabs {
+  border-bottom-color: var(--border);
+}
+
+html.dark .tab {
+  color: var(--text-secondary);
+}
+
+html.dark .tab:hover {
+  color: var(--primary);
+}
+
+html.dark .tab.active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+
+/* Chip styling in dark mode */
+html.dark .chip {
+  background: var(--bg-secondary);
+  border-color: var(--border);
+  color: var(--text-primary);
+}
+
+html.dark .chip:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: white;
+}
+
+/* Modal in dark mode */
+html.dark .modal {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+html.dark .modal-content {
+  background: var(--bg-primary);
+  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.8);
+}
+
+/* Scrollbar in dark mode */
+html.dark ::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: var(--border);
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: var(--text-tertiary);
+}
+
+/* Status indicators in dark mode */
+html.dark .status-online {
+  color: #34C759;
+}
+
+html.dark .status-offline {
+  color: #FF3B30;
+}
+
+/* Spinner in dark mode */
+html.dark .spinner {
+  border-color: var(--border);
+  border-top-color: var(--primary);
+}
+
+/* Selection in dark mode */
+html.dark ::selection {
+  background-color: var(--primary);
+  color: white;
+}
+
+/* Dark mode transitions */
+html.dark,
+html.dark * {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Focus styles for accessibility in dark mode */
+html.dark button:focus-visible,
+html.dark a:focus-visible,
+html.dark input:focus-visible,
+html.dark select:focus-visible,
+html.dark textarea:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Code blocks in dark mode */
+html.dark code,
+html.dark pre {
+  background: var(--bg-secondary);
+  color: #7EC4FF;
+  border: 1px solid var(--border);
+}
+
+/* Link styling in dark mode */
+html.dark a {
+  color: #7EC4FF;
+}
+
+html.dark a:hover {
+  color: #AED9FF;
+}
+
+/* Loader animation visibility in dark mode */
+html.dark .skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--bg-secondary) 0%,
+    var(--bg-tertiary) 50%,
+    var(--bg-secondary) 100%
+  );
+}
+
+/* FAB in dark mode */
+html.dark .fab {
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
+}
+
+html.dark .fab:hover {
+  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.5);
+}
+
+/* System-level dark mode */
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme]) {
+    --bg-primary: #0F172A;
+    --bg-secondary: #1A202C;
+    --bg-tertiary: #2D3748;
+    --bg-darker: #3F4B5D;
+    --text-primary: #FFFFFF;
+    --text-secondary: #CCCCCC;
+  }
+}
+
+/* Smooth dark mode toggle transition */
+html.dark-transition,
+html.dark-transition *,
+html.dark-transition *::before,
+html.dark-transition *::after {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
+}
+
+/* Dark mode specific animations */
+@keyframes darkModeAppear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+html.dark .fade-in {
+  animation: darkModeAppear 0.3s ease-out;
+}

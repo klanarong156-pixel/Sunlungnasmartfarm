@@ -2,41 +2,63 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="description" content="SmartFarm V14 Premium Enterprise - Dashboard">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="description" content="SmartFarm V15 Premium - Professional Smart Farming Management System">
   <meta name="theme-color" content="#007AFF">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="SmartFarm">
+  <meta name="apple-mobile-web-app-title" content="SmartFarm V15">
+  <meta name="format-detection" content="telephone=no">
   
-  <title>SmartFarm V14 Premium Enterprise</title>
+  <title>SmartFarm V15 Premium - Smart Farming Management</title>
   
   <link rel="manifest" href="/manifest.json">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="apple-touch-icon" href="/assets/icons/icon-192x192.png">
+  <link rel="icon" type="image/png" href="/assets/icons/icon-192x192.png">
   
   <!-- Styles -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mqtt@5.0.0/dist/mqtt.min.js"></script>
   <link rel="stylesheet" href="/src/styles/global.css">
   <link rel="stylesheet" href="/src/styles/premium.css">
+  <link rel="stylesheet" href="/src/styles/responsive.css">
+  <link rel="stylesheet" href="/src/styles/dark-mode.css">
   
   <style>
     body {
       overscroll-behavior-y: contain;
       overflow: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
     }
     #root {
       width: 100%;
       height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    @supports (padding: max(0px)) {
+      body {
+        padding-left: max(12px, env(safe-area-inset-left));
+        padding-right: max(12px, env(safe-area-inset-right));
+        padding-top: max(12px, env(safe-area-inset-top));
+        padding-bottom: max(12px, env(safe-area-inset-bottom));
+      }
     }
   </style>
 </head>
 <body class="premium-ui">
   <div id="root">
-    <div class="flex items-center justify-center h-screen bg-white dark:bg-black">
+    <div class="flex items-center justify-center h-screen bg-white dark:bg-slate-950">
       <div class="flex flex-col items-center gap-4">
         <div class="w-12 h-12 border-4 border-blue-500/20 border-t-blue-500 rounded-full animate-spin"></div>
-        <div class="text-sm font-medium text-gray-400 uppercase tracking-widest">SmartFarm V14 Loading...</div>
+        <div class="text-sm font-medium text-gray-600 dark:text-gray-400 uppercase tracking-widest">SmartFarm V15 Loading...</div>
       </div>
     </div>
   </div>
@@ -45,14 +67,35 @@
   <script type="module" src="/src/app.js"></script>
   
   <script>
+    // Detect dark mode preference
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+      document.documentElement.classList.add('dark');
+    }
+
     // Register Service Worker for PWA
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js')
-          .then(reg => console.log('Service Worker registered'))
-          .catch(err => console.log('Service Worker registration failed:', err));
+          .then(reg => {
+            console.log('✓ Service Worker registered successfully');
+            // Check for updates every hour
+            setInterval(() => reg.update(), 3600000);
+          })
+          .catch(err => console.warn('Service Worker registration failed:', err));
       });
     }
+
+    // Handle offline/online events
+    window.addEventListener('online', () => {
+      document.body.classList.remove('offline');
+      console.log('✓ Connection restored');
+    });
+    window.addEventListener('offline', () => {
+      document.body.classList.add('offline');
+      console.log('⚠ Connection lost - offline mode activated');
+    });
 
     // iOS double-tap zoom prevention
     let lastTouchEnd = 0;
@@ -63,6 +106,11 @@
       }
       lastTouchEnd = now;
     }, false);
+
+    // Prevent pull-to-refresh
+    document.addEventListener('touchmove', (e) => {
+      if (e.touches.length > 1) e.preventDefault();
+    }, { passive: false });
   </script>
 </body>
 </html>

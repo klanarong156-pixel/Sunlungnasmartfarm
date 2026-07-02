@@ -1,7 +1,7 @@
 {
-  "name": "smartfarm-v14-backend",
-  "version": "14.0.0",
-  "description": "SmartFarm V14 Premium Enterprise Backend Server",
+  "name": "smartfarm-v15-premium",
+  "version": "15.0.0",
+  "description": "SmartFarm V15 Premium - Professional Smart Farming Management System",
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",

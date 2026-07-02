@@ -2,19 +2,69 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SmartFarm V14 - Admin Panel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="SmartFarm V15 Premium - Admin Panel">
+  <meta name="theme-color" content="#007AFF">
+  <title>SmartFarm V15 Premium - Admin Panel</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="/src/styles/global.css">
+  <link rel="stylesheet" href="/src/styles/premium.css">
+  <link rel="stylesheet" href="/src/styles/responsive.css">
+  <link rel="stylesheet" href="/src/styles/dark-mode.css">
+  
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+    }
     .admin-grid {
       display: grid;
       grid-template-columns: 250px 1fr;
       height: 100vh;
+      gap: 0;
+    }
+    @media (max-width: 768px) {
+      .admin-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+      }
+      .sidebar {
+        position: fixed;
+        left: -250px;
+        top: 0;
+        width: 250px;
+        height: 100vh;
+        z-index: 1000;
+        transition: left 0.3s ease;
+      }
+      .sidebar.open {
+        left: 0;
+      }
     }
     .sidebar {
       background: var(--bg-darker);
       border-right: 1px solid var(--border);
       padding: 1.5rem;
+      overflow-y: auto;
+      position: relative;
+    }
+    .sidebar h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, #007AFF 0%, #34C759 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     .content {
       padding: 2rem;
@@ -28,42 +78,80 @@
       border-radius: var(--radius-md);
       margin-bottom: 0.5rem;
       transition: all 0.2s;
+      border-left: 3px solid transparent;
     }
     .nav-item:hover, .nav-item.active {
       background: rgba(6, 182, 212, 0.1);
       color: var(--accent);
+      border-left-color: var(--accent);
+      padding-left: 0.75rem;
     }
   </style>
 </head>
 <body>
   <div id="admin-root" class="admin-grid">
-    <aside class="sidebar">
-      <h2>Admin Panel</h2>
+    <aside class="sidebar" id="sidebar">
+      <h2>Admin V15</h2>
       <nav style="margin-top: 2rem;">
-        <a href="#dashboard" class="nav-item active">Dashboard</a>
-        <a href="#users" class="nav-item">จัดการผู้ใช้</a>
-        <a href="#devices" class="nav-item">จัดการอุปกรณ์</a>
-        <a href="#sensors" class="nav-item">จัดการเซนเซอร์</a>
-        <a href="#logs" class="nav-item">Audit Logs</a>
-        <a href="#system" class="nav-item">System Health</a>
-        <a href="#backup" class="nav-item">Backup & Restore</a>
-        <a href="/" class="nav-item" style="margin-top: 2rem; border-top: 1px solid var(--border); padding-top: 1rem;">Back to Dashboard</a>
+        <a href="#dashboard" class="nav-item active" data-page="dashboard">📊 Dashboard</a>
+        <a href="#users" class="nav-item" data-page="users">👥 จัดการผู้ใช้</a>
+        <a href="#devices" class="nav-item" data-page="devices">🔧 จัดการอุปกรณ์</a>
+        <a href="#sensors" class="nav-item" data-page="sensors">📈 จัดการเซนเซอร์</a>
+        <a href="#logs" class="nav-item" data-page="logs">📋 Audit Logs</a>
+        <a href="#system" class="nav-item" data-page="system">⚙️ System Health</a>
+        <a href="#backup" class="nav-item" data-page="backup">💾 Backup & Restore</a>
+        <a href="#settings" class="nav-item" data-page="settings">⚡ Settings</a>
+        <a href="/" class="nav-item" style="margin-top: 2rem; border-top: 1px solid var(--border); padding-top: 1rem;">🏠 Back to Dashboard</a>
       </nav>
     </aside>
     <main class="content">
-      <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
-        <h1 id="page-title">Admin Dashboard</h1>
-        <div id="admin-user-info"></div>
+      <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <button id="menu-toggle" style="display: none; background: var(--bg-accent); color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; cursor: pointer; font-size: 1.2rem;">☰</button>
+          <h1 id="page-title" style="display: inline-block; margin-left: 1rem;">Admin Dashboard</h1>
+        </div>
+        <div id="admin-user-info" style="display: flex; align-items: center; gap: 1rem;">
+          <span id="admin-status" style="padding: 0.5rem 1rem; background: var(--bg-accent); border-radius: 0.5rem; color: white;">Admin</span>
+        </div>
       </header>
       <div id="admin-content">
         <!-- Content will be loaded here -->
         <div class="glass-lg" style="padding: 2rem;">
-          <h3>ยินดีต้อนรับสู่ระบบจัดการหลังบ้าน</h3>
-          <p>กรุณาเลือกเมนูทางด้านซ้ายเพื่อจัดการระบบ</p>
+          <h3>ยินดีต้อนรับสู่ระบบจัดการหลังบ้าน SmartFarm V15 Premium</h3>
+          <p style="margin-top: 1rem; color: var(--text-secondary);">กรุณาเลือกเมนูเพื่อจัดการระบบ</p>
         </div>
       </div>
     </main>
   </div>
   <script type="module" src="/src/admin.js"></script>
+  <script>
+    // Dark mode detection and responsive menu toggle
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+      document.documentElement.classList.add('dark');
+    }
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const sidebar = document.getElementById('sidebar');
+    const mediaQuery = window.matchMedia('(max-width: 768px)');
+    
+    function updateMenuToggle() {
+      if (mediaQuery.matches) {
+        menuToggle.style.display = 'inline-block';
+      } else {
+        menuToggle.style.display = 'none';
+        sidebar.classList.remove('open');
+      }
+    }
+    
+    menuToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('open');
+    });
+    
+    mediaQuery.addEventListener('change', updateMenuToggle);
+    updateMenuToggle();
+  </script>
 </body>
 </html>
