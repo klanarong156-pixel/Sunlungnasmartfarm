@@ -1,68 +1,15 @@
+
 <!DOCTYPE html>
-<html lang="th">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="description" content="SmartFarm V14 Premium Enterprise - Dashboard">
-  <meta name="theme-color" content="#007AFF">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="SmartFarm">
-  
-  <title>SmartFarm V14 Premium Enterprise</title>
-  
-  <link rel="manifest" href="/manifest.json">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  
-  <!-- Styles -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <link rel="stylesheet" href="/src/styles/global.css">
-  <link rel="stylesheet" href="/src/styles/premium.css">
-  
-  <style>
-    body {
-      overscroll-behavior-y: contain;
-      overflow: hidden;
-    }
-    #root {
-      width: 100%;
-      height: 100vh;
-    }
-  </style>
+<title>SmartFarm Dashboard</title>
 </head>
-<body class="premium-ui">
-  <div id="root">
-    <div class="flex items-center justify-center h-screen bg-white dark:bg-black">
-      <div class="flex flex-col items-center gap-4">
-        <div class="w-12 h-12 border-4 border-blue-500/20 border-t-blue-500 rounded-full animate-spin"></div>
-        <div class="text-sm font-medium text-gray-400 uppercase tracking-widest">SmartFarm V14 Loading...</div>
-      </div>
-    </div>
-  </div>
+<body>
+<h2>SmartFarm V14 Dashboard</h2>
 
-  <!-- Application Entry -->
-  <script type="module" src="/src/app.js"></script>
-  
-  <script>
-    // Register Service Worker for PWA
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-          .then(reg => console.log('Service Worker registered'))
-          .catch(err => console.log('Service Worker registration failed:', err));
-      });
-    }
+<div>Sensor: <span id="sensor">-</span></div>
+<div>Pump: <span id="pump">-</span></div>
 
-    // iOS double-tap zoom prevention
-    let lastTouchEnd = 0;
-    document.addEventListener('touchend', (event) => {
-      const now = (new Date()).getTime();
-      if (now - lastTouchEnd <= 300) {
-        event.preventDefault();
-      }
-      lastTouchEnd = now;
-    }, false);
-  </script>
+<script src="app.js"></script>
 </body>
 </html>
